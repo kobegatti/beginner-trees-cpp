@@ -1,4 +1,4 @@
-# Beginner-Trees
+# beginner-trees-cpp
 C++ Investigation of Tree Data Structure.
 
 Build the Project - make
