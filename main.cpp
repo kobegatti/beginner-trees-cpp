@@ -9,11 +9,18 @@ using namespace std;
 ////////////////////////////////////////
 // Global constants
 ///////////////////////////////////////
-const string MAIN_MENU = "1. Insert one integer into the tree\n2. Display the tree(in order)\n3. Display Leaf Count\n4. Display Tree Height\n5. Display Tree Width\n6. Exit\n";
+#define INSERT 1
+#define IN_ORDER 2
+#define LEAF_COUNT 3 
+#define TREE_HEIGHT 4 
+#define TREE_WIDTH 5 
+#define EXIT 6 
+
+const string MAIN_MENU = "1. Insert one integer into the tree\n2. In Order Display\n3. Display Leaf Count\n4. Display Tree Height\n5. Display Tree Width\n6. Exit\n";
 const string MENU_PROMPT = "Please choose a menu option: ";
 const string INSERT_PROMPT = "What value would you like to insert?";
 const string ENTER_POS_NUM = "Please enter an integer greater than or equal to zero.";
-const string VALID_CHOICE = "Please enter a valid choice.";
+const string INVALID_CHOICE = "Please enter a valid choice.";
 const string THANK_YOU = "Thank you and goodbye.";
 
 ////////////////////////////////////////
@@ -58,8 +65,8 @@ void ProcessInsert(IntTree& Oak)
 
       if (data < 0) // Negative number error case
       {
-         cout << ENTER_POS_NUM << endl;
          cout << "You entered " << input << endl << endl;
+         cout << ENTER_POS_NUM << endl;
       }
       else
       {
@@ -128,7 +135,7 @@ int main()
       getline(cin, choice_str);
       choice = GetNumber_From_String(choice_str);
 
-      if (choice == 6)
+      if (choice == EXIT)
       {
          cout << THANK_YOU << endl;
          break;
@@ -136,17 +143,17 @@ int main()
 
       switch (choice)
       {
-      case 1: ProcessInsert(Oak);
+      case INSERT: ProcessInsert(Oak);
          break;
-      case 2: ProcessDisplay(Oak);
+      case IN_ORDER: ProcessDisplay(Oak);
          break;
-      case 3: ProcessLeafCount(Oak);
+      case LEAF_COUNT: ProcessLeafCount(Oak);
          break;
-      case 4: ProcessTreeHeight(Oak);
+      case TREE_HEIGHT: ProcessTreeHeight(Oak);
          break;
-      case 5: ProcessMaxTreeWidth(Oak);
+      case TREE_WIDTH: ProcessMaxTreeWidth(Oak);
          break;
-      default: cout << VALID_CHOICE << endl;
+      default: cout << INVALID_CHOICE << endl;
          break;
       }
    } while (true);
