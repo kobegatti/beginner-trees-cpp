@@ -48,9 +48,7 @@ int IntTree::DestroySubTree(TreeNode* nodePtr)
 ///////////////////////////////////////
 void IntTree::InsertNode(int num) 
 {
-    TreeNode* newNode = nullptr;
-
-    newNode = new TreeNode(num);
+    TreeNode* newNode = new TreeNode(num);
 
     Insert(root, newNode);
 }
@@ -60,7 +58,7 @@ void IntTree::InsertNode(int num)
 ///////////////////////////////////////
 void IntTree::Insert(TreeNode*& nodePtr, TreeNode*& newNode)
 {
-    if (nodePtr == nullptr) // tree is empty
+    if (nodePtr == nullptr)
     {
         nodePtr = newNode; // create new node
     }
@@ -108,7 +106,7 @@ int IntTree::CountLeafNodes()
 ///////////////////////////////////////
 int IntTree::GetLeafCount(TreeNode* nodePtr)
 {
-    if (nullptr == nodePtr) // tree is empty
+    if (nullptr == nodePtr)
     {
         return 0;
     }
@@ -118,7 +116,6 @@ int IntTree::GetLeafCount(TreeNode* nodePtr)
         return 1;
     }
 
-    // left subtree leaves + right subtree leaves
     return GetLeafCount(nodePtr->left) + GetLeafCount(nodePtr->right);
 }
 
@@ -135,9 +132,9 @@ int IntTree::DisplayTreeHeight()
 ///////////////////////////////////////
 int IntTree::GetTreeHeight(TreeNode* nodePtr)
 {
-    if (nullptr == nodePtr) // tree is empty
+    if (nullptr == nodePtr)
     {
-        return -1;
+        return 0;
     }
 
     return 1 + std::max(GetTreeHeight(nodePtr->left),
@@ -157,12 +154,12 @@ int IntTree::DisplayMaxWidth()
 ///////////////////////////////////////
 int IntTree::GetWidth(TreeNode* root, int level)
 {
-    if (nullptr == root) // tree empty
+    if (nullptr == root)
     {
         return 0;
     }
 
-    if (1 == level) // root level 
+    if (1 == level)
     {
         return 1;
     }
@@ -175,21 +172,19 @@ int IntTree::GetWidth(TreeNode* root, int level)
 ///////////////////////////////////////
 int IntTree::GetMaxWidth(TreeNode* root)
 {
-    int maxWidth = 0; // Variable initialization
+    int maxWidth = 0;
     int width = 0;
-    int num_levels = GetTreeHeight(root) + 1; // Number of levels is one more than height
+    int numLevels = GetTreeHeight(root);
 
-    for (int i = 0; i < num_levels; ++i)
+    for (int i = 1; i <= numLevels; ++i)
     {
-        width = GetWidth(root, i + 1);
+        width = GetWidth(root, i);
 
         if (width > maxWidth)
         {
             maxWidth = width;
         }
-
     }
 
     return maxWidth;
 }
-
