@@ -14,27 +14,33 @@ IntTree::IntTree() : root(nullptr) {}
 ///////////////////////////////////////
 IntTree::~IntTree() 
 {
-   DestroySubTree(root);
+    int numFreed = DestroySubTree(root);
+	std::cout << "Freed " << numFreed << " tree node(s)...\n";
 }
 
 ////////////////////////////////////////
 // Delete function
 ///////////////////////////////////////
-void IntTree::DestroySubTree(TreeNode* nodePtr)
+int IntTree::DestroySubTree(TreeNode* nodePtr)
 {
-   if (nodePtr)
-   {
-      if (nodePtr->left)
-      {
-         DestroySubTree(nodePtr->left);
-      }
-      if (nodePtr->right)
-      {
-         DestroySubTree(nodePtr->right);
-      }
+	int numDeleted = 0;
 
-      delete nodePtr;
-   }
+    if (nodePtr)
+    {
+        if (nodePtr->left)
+        {
+            numDeleted += DestroySubTree(nodePtr->left);
+        }
+        if (nodePtr->right)
+        {
+            numDeleted += DestroySubTree(nodePtr->right);
+        }
+
+        delete nodePtr;
+		numDeleted++;
+    }
+
+	return numDeleted;
 }
 
 ////////////////////////////////////////
@@ -42,11 +48,11 @@ void IntTree::DestroySubTree(TreeNode* nodePtr)
 ///////////////////////////////////////
 void IntTree::InsertNode(int num) 
 {
-   TreeNode* newNode = nullptr;
+    TreeNode* newNode = nullptr;
 
-   newNode = new TreeNode(num);
+    newNode = new TreeNode(num);
 
-   Insert(root, newNode);
+    Insert(root, newNode);
 }
 
 ////////////////////////////////////////
@@ -54,18 +60,18 @@ void IntTree::InsertNode(int num)
 ///////////////////////////////////////
 void IntTree::Insert(TreeNode*& nodePtr, TreeNode*& newNode)
 {
-   if (nodePtr == nullptr) // tree is empty
-   {
-      nodePtr = newNode; // create new node
-   }
-   else if (newNode->data < nodePtr->data)
-   {
-      Insert(nodePtr->left, newNode); // insert into left subtree
-   }
-   else
-   {
-      Insert(nodePtr->right, newNode); // insert into right subtree
-   }
+    if (nodePtr == nullptr) // tree is empty
+    {
+        nodePtr = newNode; // create new node
+    }
+    else if (newNode->data < nodePtr->data)
+    {
+        Insert(nodePtr->left, newNode); // insert into left subtree
+    }
+    else
+    {
+        Insert(nodePtr->right, newNode); // insert into right subtree
+    }
 }
 
 ////////////////////////////////////////
@@ -73,7 +79,7 @@ void IntTree::Insert(TreeNode*& nodePtr, TreeNode*& newNode)
 ///////////////////////////////////////
 void IntTree::DisplayInOrder() const
 {
-   InOrder(root);
+    InOrder(root);
 }
 
 ////////////////////////////////////////
@@ -81,12 +87,12 @@ void IntTree::DisplayInOrder() const
 ///////////////////////////////////////
 void IntTree::InOrder(TreeNode* nodePtr) const
 {
-   if (nodePtr)
-   {
-      InOrder(nodePtr->left); // traverse left subtree
-      std::cout << nodePtr->data << " "; // print data
-      InOrder(nodePtr->right); // traverse right subtree
-   }
+    if (nodePtr)
+    {
+        InOrder(nodePtr->left); // traverse left subtree
+        std::cout << nodePtr->data << " "; // print data
+        InOrder(nodePtr->right); // traverse right subtree
+    }
 }
 
 ////////////////////////////////////////
@@ -94,7 +100,7 @@ void IntTree::InOrder(TreeNode* nodePtr) const
 ///////////////////////////////////////
 int IntTree::CountLeafNodes()
 {
-   return GetLeafCount(root);
+    return GetLeafCount(root);
 }
 
 ////////////////////////////////////////
@@ -102,18 +108,18 @@ int IntTree::CountLeafNodes()
 ///////////////////////////////////////
 int IntTree::GetLeafCount(TreeNode* nodePtr)
 {
-   if (nullptr == nodePtr) // tree is empty
-   {
-      return 0;
-   }
+    if (nullptr == nodePtr) // tree is empty
+    {
+        return 0;
+    }
 
-   if (nullptr == nodePtr->left && nullptr == nodePtr->right) // leaf node
-   {
-      return 1;
-   }
+    if (nullptr == nodePtr->left && nullptr == nodePtr->right) // leaf node
+    {
+        return 1;
+    }
 
-	// left subtree leaves + right subtree leaves
-   return GetLeafCount(nodePtr->left) + GetLeafCount(nodePtr->right);
+    // left subtree leaves + right subtree leaves
+    return GetLeafCount(nodePtr->left) + GetLeafCount(nodePtr->right);
 }
 
 ////////////////////////////////////////
@@ -121,7 +127,7 @@ int IntTree::GetLeafCount(TreeNode* nodePtr)
 ///////////////////////////////////////
 int IntTree::DisplayTreeHeight()
 {
-   return GetTreeHeight(root);
+    return GetTreeHeight(root);
 }
 
 ////////////////////////////////////////
@@ -129,13 +135,13 @@ int IntTree::DisplayTreeHeight()
 ///////////////////////////////////////
 int IntTree::GetTreeHeight(TreeNode* nodePtr)
 {
-   if (nullptr == nodePtr) // tree is empty
-   {
-      return -1;
-   }
+    if (nullptr == nodePtr) // tree is empty
+    {
+        return -1;
+    }
 
-   return 1 + std::max(GetTreeHeight(nodePtr->left),
-   						GetTreeHeight(nodePtr->right));
+    return 1 + std::max(GetTreeHeight(nodePtr->left),
+            GetTreeHeight(nodePtr->right));
 }
 
 ////////////////////////////////////////
@@ -143,7 +149,7 @@ int IntTree::GetTreeHeight(TreeNode* nodePtr)
 ///////////////////////////////////////
 int IntTree::DisplayMaxWidth()
 {
-   return GetMaxWidth(root);
+    return GetMaxWidth(root);
 }
 
 ////////////////////////////////////////
@@ -151,17 +157,17 @@ int IntTree::DisplayMaxWidth()
 ///////////////////////////////////////
 int IntTree::GetWidth(TreeNode* root, int level)
 {
-   if (nullptr == root) // tree empty
-   {
-      return 0;
-   }
+    if (nullptr == root) // tree empty
+    {
+        return 0;
+    }
 
-   if (1 == level) // root level 
-   {
-      return 1;
-   }
+    if (1 == level) // root level 
+    {
+        return 1;
+    }
 
-   return GetWidth(root->left, level-1) + GetWidth(root->right, level-1);
+    return GetWidth(root->left, level-1) + GetWidth(root->right, level-1);
 }
 
 ////////////////////////////////////////
@@ -169,21 +175,21 @@ int IntTree::GetWidth(TreeNode* root, int level)
 ///////////////////////////////////////
 int IntTree::GetMaxWidth(TreeNode* root)
 {
-   int maxWidth = 0; // Variable initialization
-   int width = 0;
-   int num_levels = GetTreeHeight(root) + 1; // Number of levels is one more than height
+    int maxWidth = 0; // Variable initialization
+    int width = 0;
+    int num_levels = GetTreeHeight(root) + 1; // Number of levels is one more than height
 
-   for (int i = 0; i < num_levels; ++i)
-   {
-      width = GetWidth(root, i + 1);
+    for (int i = 0; i < num_levels; ++i)
+    {
+        width = GetWidth(root, i + 1);
 
-      if (width > maxWidth)
-      {
-         maxWidth = width;
-      }
+        if (width > maxWidth)
+        {
+            maxWidth = width;
+        }
 
-   }
+    }
 
-   return maxWidth;
+    return maxWidth;
 }
 
