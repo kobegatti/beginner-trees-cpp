@@ -15,7 +15,7 @@
 #define EXIT 6 
 
 const std::string MAIN_MENU = "1. Insert Node \n2. In Order Print\n3. Leaf Count\n4. Tree Height\n5. Tree Width\n6. Exit\n";
-const std::string MENU_PROMPT = "Please choose a menu option: ";
+const std::string MENU_PROMPT = "Select an option: ";
 const std::string INSERT_PROMPT = "Enter node value (int): ";
 const std::string INVALID_CHOICE = "Invalid choice: ";
 
@@ -149,7 +149,8 @@ int main()
                 ProcessMaxTreeWidth(Oak);
                 break;
             default:
-                std::cout << INVALID_CHOICE << choice << std::endl;
+                std::cout << INVALID_CHOICE << choice;
+				std::cout << std::endl << std::endl;
                 break;
         }
 
