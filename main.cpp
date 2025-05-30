@@ -3,7 +3,6 @@
 
 #include "intTree.h"
 
-using namespace std;
 
 ////////////////////////////////////////
 // Global constants
@@ -15,17 +14,17 @@ using namespace std;
 #define TREE_WIDTH 5 
 #define EXIT 6 
 
-const string MAIN_MENU = "1. Insert one integer into the tree\n2. In Order Display\n3. Display Leaf Count\n4. Display Tree Height\n5. Display Tree Width\n6. Exit\n";
-const string MENU_PROMPT = "Please choose a menu option: ";
-const string INSERT_PROMPT = "What value would you like to insert?";
-const string ENTER_POS_NUM = "Please enter an integer greater than or equal to zero.";
-const string INVALID_CHOICE = "Please enter a valid choice.";
-const string THANK_YOU = "Thank you and goodbye.";
+const std::string MAIN_MENU = "1. Insert one integer into the tree\n2. In Order Display\n3. Display Leaf Count\n4. Display Tree Height\n5. Display Tree Width\n6. Exit\n";
+const std::string MENU_PROMPT = "Please choose a menu option: ";
+const std::string INSERT_PROMPT = "What value would you like to insert?";
+const std::string ENTER_POS_NUM = "Please enter an integer greater than or equal to zero.";
+const std::string INVALID_CHOICE = "Please enter a valid choice.";
+const std::string THANK_YOU = "Thank you and goodbye.";
 
 ////////////////////////////////////////
 // String to number function
 ///////////////////////////////////////
-int GetNumber_From_String(string str)
+int GetNumber_From_String(std::string str)
 {
    if (str.empty())
    {
@@ -37,7 +36,7 @@ int GetNumber_From_String(string str)
       return 0;
    }
 
-   stringstream ss(str);
+   std::stringstream ss(str);
    int num = 0;
 
    ss >> num; // String to num
@@ -55,26 +54,26 @@ int GetNumber_From_String(string str)
 ///////////////////////////////////////
 void ProcessInsert(IntTree& Oak)
 {
-   string input = "";
+   std::string input = "";
    int data = 0;
 
    do
    {
-      cout << INSERT_PROMPT << endl; 
-      getline(cin, input); // User input
+      std::cout << INSERT_PROMPT << std::endl; 
+      getline(std::cin, input); // User input
 
       data = GetNumber_From_String(input);
 
       if (data < 0) // negative number error case
       {
-         cout << "You entered " << input << endl << endl;
-         cout << ENTER_POS_NUM << endl;
+         std::cout << "You entered " << input << std::endl << std::endl;
+         std::cout << ENTER_POS_NUM << std::endl;
       }
       else
       {
          Oak.InsertNode(data);
 		 
-         cout << endl;
+         std::cout << std::endl;
          break;
       }
    } while (true);
@@ -85,9 +84,9 @@ void ProcessInsert(IntTree& Oak)
 ///////////////////////////////////////
 void ProcessDisplay(IntTree& Oak)
 {
-   cout << "Tree In Order: ";
+   std::cout << "Tree In Order: ";
    Oak.DisplayInOrder();
-   cout << endl << endl;
+   std::cout << std::endl << std::endl;
 }
 
 ////////////////////////////////////////
@@ -96,7 +95,7 @@ void ProcessDisplay(IntTree& Oak)
 void ProcessLeafCount(IntTree& Oak)
 {
    int leaves = Oak.CountLeafNodes();
-   cout << "Leaf Count: " << leaves << endl << endl;
+   std::cout << "Leaf Count: " << leaves << std::endl << std::endl;
 }
 
 ////////////////////////////////////////
@@ -105,7 +104,7 @@ void ProcessLeafCount(IntTree& Oak)
 void ProcessTreeHeight(IntTree& Oak)
 {
    int height = Oak.DisplayTreeHeight();
-   cout << "Tree Height: " << height << endl << endl;
+   std::cout << "Tree Height: " << height << std::endl << std::endl;
 }
 
 ////////////////////////////////////////
@@ -114,7 +113,7 @@ void ProcessTreeHeight(IntTree& Oak)
 void ProcessMaxTreeWidth(IntTree& Oak)
 {
    int width = Oak.DisplayMaxWidth();
-   cout << "Tree Width: " << width << endl << endl;
+   std::cout << "Tree Width: " << width << std::endl << std::endl;
 }
 
 ////////////////////////////////////////
@@ -122,21 +121,21 @@ void ProcessMaxTreeWidth(IntTree& Oak)
 ///////////////////////////////////////
 int main()
 {
-	string choice_str = "";
+	std::string choice_str = "";
 	IntTree Oak{};
 	int choice = 0;
 
 	do
 	{
-		cout << MAIN_MENU << endl;
-		cout << MENU_PROMPT;
+		std::cout << MAIN_MENU << std::endl;
+		std::cout << MENU_PROMPT;
 
-		getline(cin, choice_str);
+		getline(std::cin, choice_str);
 		choice = GetNumber_From_String(choice_str);
 
 		if (choice == EXIT)
 		{
-			cout << THANK_YOU << endl;
+			std::cout << THANK_YOU << std::endl;
 			break;
 		}
 
@@ -158,7 +157,7 @@ int main()
 				ProcessMaxTreeWidth(Oak);
 				break;
 			default:
-				cout << INVALID_CHOICE << endl;
+				std::cout << INVALID_CHOICE << std::endl;
 				break;
 		}
 

@@ -3,7 +3,6 @@
 
 #include "intTree.h"
 
-using namespace std;
 
 ////////////////////////////////////////
 // Constructor
@@ -85,7 +84,7 @@ void IntTree::InOrder(TreeNode* nodePtr) const
    if (nodePtr)
    {
       InOrder(nodePtr->left); // traverse left subtree
-      cout << nodePtr->data << " "; // print data
+      std::cout << nodePtr->data << " "; // print data
       InOrder(nodePtr->right); // traverse right subtree
    }
 }
@@ -135,8 +134,8 @@ int IntTree::GetTreeHeight(TreeNode* nodePtr)
       return -1;
    }
 
-   return 1 + max(GetTreeHeight(nodePtr->left),
-   					GetTreeHeight(nodePtr->right));
+   return 1 + std::max(GetTreeHeight(nodePtr->left),
+   						GetTreeHeight(nodePtr->right));
 }
 
 ////////////////////////////////////////
