@@ -30,13 +30,13 @@ void printMainMenu()
 }
 
 ////////////////////////////////////////
-// string to int function
+// string to long long int function
 ///////////////////////////////////////
-int stringToInt(std::string str)
+long long int stringToInt(std::string str)
 {
     if (str.empty())
     {
-        return 0; // empty string means zero
+        return LLONG_MIN; // empty string error 
     }
 
     if (1 == str.size() && str.at(0) == '0')
@@ -45,13 +45,13 @@ int stringToInt(std::string str)
     }
 
     std::stringstream ss(str);
-    int num = 0;
+    long long int num = 0;
 
-    ss >> num; // String to num
+    ss >> num; // string to num
 
-    if (0 == num) // Error for single char input
+    if (0 == num) // char input error
     {
-        return -1;
+        return LLONG_MIN;
     }
 
     return num;
@@ -74,8 +74,9 @@ void ProcessInsert(IntTree& Oak)
 
         if (data < INT_MIN || data > INT_MAX)
         {
-            std::cout << "You entered " << input << std::endl;
-			std::cout << INT_MIN << " < valid input < " << INT_MAX << std::endl;
+            std::cout << "Entered: " << input << std::endl;
+			std::cout << INT_MIN << " <= valid input <= " << INT_MAX;
+			std::cout << std::endl;
         }
         else
         {
@@ -83,8 +84,6 @@ void ProcessInsert(IntTree& Oak)
 			std::cout << std::endl;
             break;
     	}
-
-
 	} while (true);
 }
 
@@ -127,7 +126,7 @@ void ProcessMaxTreeWidth(IntTree& Oak)
 
 int main()
 {
-    std::string choice_str = "";
+    std::string choiceStr = "";
     IntTree Oak{};
     int choice = 0;
 
@@ -136,8 +135,8 @@ int main()
 		printMainMenu();
         std::cout << MENU_PROMPT;
 
-        getline(std::cin, choice_str);
-        choice = stringToInt(choice_str);
+        getline(std::cin, choiceStr);
+        choice = stringToInt(choiceStr);
 
         if (choice == Exit) { break; }
 
