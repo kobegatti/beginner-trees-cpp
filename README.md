@@ -1,8 +1,8 @@
 # beginner-trees-cpp
-C++ Investigation of Tree Data Structure.
+Tree Data Structure in C++. 
 
-Build the Project - make
+Build - make
 
-Run the Program - make run
+Run - make run
 
-Clean up - make clean
+Clean - make clean
