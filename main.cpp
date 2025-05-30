@@ -1,11 +1,10 @@
 #include <iostream>
 #include <sstream>
-
 #include "intTree.h"
 
 
 ////////////////////////////////////////
-// global constants
+// Global Constants
 ///////////////////////////////////////
 const short Insert = 1;
 const short InOrder = 2;
@@ -18,6 +17,10 @@ const std::string MENU_PROMPT = "Select an option: ";
 const std::string INSERT_PROMPT = "Enter node value (int): ";
 const std::string INVALID_CHOICE = "Invalid choice: ";
 
+
+////////////////////////////////////////
+// Print Main Menu Function
+///////////////////////////////////////
 void printMainMenu()
 {
 	std::cout << "1. Insert Node\n";
@@ -30,9 +33,9 @@ void printMainMenu()
 }
 
 ////////////////////////////////////////
-// string to long long int function
+// String to Long Long Int Function
 ///////////////////////////////////////
-long long int stringToInt(std::string str)
+long long int stringToLongLongInt(std::string str)
 {
     if (str.empty())
     {
@@ -70,7 +73,7 @@ void ProcessInsert(IntTree& Oak)
         std::cout << INSERT_PROMPT; 
         getline(std::cin, input);
 
-        data = stringToInt(input);
+        data = stringToLongLongInt(input);
 
         if (data < INT_MIN || data > INT_MAX)
         {
@@ -88,7 +91,7 @@ void ProcessInsert(IntTree& Oak)
 }
 
 ////////////////////////////////////////
-// In order print function
+// In Order Print Function
 ///////////////////////////////////////
 void ProcessDisplay(IntTree& Oak)
 {
@@ -98,7 +101,7 @@ void ProcessDisplay(IntTree& Oak)
 }
 
 ////////////////////////////////////////
-// Leaf count function
+// Leaf Count Function
 ///////////////////////////////////////
 void ProcessLeafCount(IntTree& Oak)
 {
@@ -107,7 +110,7 @@ void ProcessLeafCount(IntTree& Oak)
 }
 
 ////////////////////////////////////////
-// Tree height function
+// Tree Height Function
 ///////////////////////////////////////
 void ProcessTreeHeight(IntTree& Oak)
 {
@@ -116,7 +119,7 @@ void ProcessTreeHeight(IntTree& Oak)
 }
 
 ////////////////////////////////////////
-// Tree width function
+// Tree Width Function
 ///////////////////////////////////////
 void ProcessMaxTreeWidth(IntTree& Oak)
 {
@@ -124,6 +127,9 @@ void ProcessMaxTreeWidth(IntTree& Oak)
     std::cout << "Tree Width: " << width << std::endl << std::endl;
 }
 
+////////////////////////////////////////
+// Main Function
+///////////////////////////////////////
 int main()
 {
     std::string choiceStr = "";
@@ -136,7 +142,7 @@ int main()
         std::cout << MENU_PROMPT;
 
         getline(std::cin, choiceStr);
-        choice = stringToInt(choiceStr);
+        choice = stringToLongLongInt(choiceStr);
 
         if (choice == Exit) { break; }
 

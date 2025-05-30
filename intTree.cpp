@@ -19,7 +19,7 @@ IntTree::~IntTree()
 }
 
 ////////////////////////////////////////
-// Delete function
+// Delete Function
 ///////////////////////////////////////
 int IntTree::DestroySubTree(TreeNode* nodePtr)
 {
