@@ -14,10 +14,20 @@ const short TreeHeight = 4;
 const short TreeWidth = 5;
 const short Exit = 6;
 
-const std::string MAIN_MENU = "1. Insert Node \n2. In Order Print\n3. Leaf Count\n4. Tree Height\n5. Tree Width\n6. Exit\n";
 const std::string MENU_PROMPT = "Select an option: ";
 const std::string INSERT_PROMPT = "Enter node value (int): ";
 const std::string INVALID_CHOICE = "Invalid choice: ";
+
+void printMainMenu()
+{
+	std::cout << "1. Insert Node\n";
+	std::cout << "2. In Order Print\n";
+	std::cout << "3. Leaf Count\n";
+	std::cout << "4. Tree Height\n";
+	std::cout << "5. Tree Width\n";
+	std::cout << "6. Exit\n";
+	std::cout << std::endl;
+}
 
 ////////////////////////////////////////
 // String to number function
@@ -123,7 +133,7 @@ int main()
 
     do
     {
-        std::cout << MAIN_MENU << std::endl;
+		printMainMenu();
         std::cout << MENU_PROMPT;
 
         getline(std::cin, choice_str);
