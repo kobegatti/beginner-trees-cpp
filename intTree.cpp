@@ -1,6 +1,8 @@
-#include <iostream>
-#include "intTree.h"
 #include <algorithm>
+#include <iostream>
+
+#include "intTree.h"
+
 using namespace std;
 
 ////////////////////////////////////////
@@ -21,16 +23,17 @@ IntTree::~IntTree()
 ///////////////////////////////////////
 void IntTree::DestroySubTree(TreeNode* nodePtr)
 {
-   if (nodePtr) // Pointer is pointing at something
+   if (nodePtr)
    {
-      if (nodePtr->left) // Check left pointer
+      if (nodePtr->left)
       {
-         DestroySubTree(nodePtr->left); // Recursive call
+         DestroySubTree(nodePtr->left);
       }
-      if (nodePtr->right) // Check right pointer
+      if (nodePtr->right)
       {
-         DestroySubTree(nodePtr->right); // Recursive call
+         DestroySubTree(nodePtr->right);
       }
+
       delete nodePtr;
    }
 }
@@ -40,7 +43,7 @@ void IntTree::DestroySubTree(TreeNode* nodePtr)
 ///////////////////////////////////////
 void IntTree::InsertNode(int num) 
 {
-   TreeNode* newNode = nullptr; // Initialize new node
+   TreeNode* newNode = nullptr;
 
    newNode = new TreeNode(num);
 
@@ -52,17 +55,17 @@ void IntTree::InsertNode(int num)
 ///////////////////////////////////////
 void IntTree::Insert(TreeNode*& nodePtr, TreeNode*& newNode)
 {
-   if (nodePtr == nullptr) // Tree is empty
+   if (nodePtr == nullptr) // tree is empty
    {
-      nodePtr = newNode; // Create new node
+      nodePtr = newNode; // create new node
    }
-   else if (newNode->data < nodePtr->data) // If new node is less than current
+   else if (newNode->data < nodePtr->data)
    {
-      Insert(nodePtr->left, newNode); // Go left uisng recursion
+      Insert(nodePtr->left, newNode); // insert into left subtree
    }
-   else // If new node is greater than current
+   else
    {
-      Insert(nodePtr->right, newNode); // Go right using recursion
+      Insert(nodePtr->right, newNode); // insert into right subtree
    }
 }
 
@@ -79,11 +82,11 @@ void IntTree::DisplayInOrder() const
 ///////////////////////////////////////
 void IntTree::InOrder(TreeNode* nodePtr) const
 {
-   if (nodePtr) // Pointer is pointing at something
+   if (nodePtr)
    {
-      InOrder(nodePtr->left); // Go left using recursion
-      cout << nodePtr->data << " "; // Print data
-      InOrder(nodePtr->right); // Go right using recursion
+      InOrder(nodePtr->left); // traverse left subtree
+      cout << nodePtr->data << " "; // print data
+      InOrder(nodePtr->right); // traverse right subtree
    }
 }
 
@@ -100,15 +103,18 @@ int IntTree::CountLeafNodes()
 ///////////////////////////////////////
 int IntTree::GetLeafCount(TreeNode* nodePtr)
 {
-   if (nodePtr == nullptr) // Tree is empty
+   if (nullptr == nodePtr) // tree is empty
    {
       return 0;
    }
-   if (nodePtr->left == nullptr && nodePtr->right == nullptr) // Property of leaf nodes
+
+   if (nullptr == nodePtr->left && nullptr == nodePtr->right) // leaf node
    {
       return 1;
    }
-   return GetLeafCount(nodePtr->left) + GetLeafCount(nodePtr->right); // Recursive call 
+
+	// left subtree leaves + right subtree leaves
+   return GetLeafCount(nodePtr->left) + GetLeafCount(nodePtr->right);
 }
 
 ////////////////////////////////////////
@@ -120,15 +126,17 @@ int IntTree::DisplayTreeHeight()
 }
 
 ////////////////////////////////////////
-// RECURSIVE Private Leaf Count Function
+// RECURSIVE Private Height Function
 ///////////////////////////////////////
 int IntTree::GetTreeHeight(TreeNode* nodePtr)
 {
-   if (nodePtr == nullptr) // Tree is empty
+   if (nullptr == nodePtr) // tree is empty
    {
       return -1;
    }
-   return 1 + max(GetTreeHeight(nodePtr->left), GetTreeHeight(nodePtr->right)); // Add one plus the max of left or right
+
+   return 1 + max(GetTreeHeight(nodePtr->left),
+   					GetTreeHeight(nodePtr->right));
 }
 
 ////////////////////////////////////////
@@ -144,16 +152,17 @@ int IntTree::DisplayMaxWidth()
 ///////////////////////////////////////
 int IntTree::GetWidth(TreeNode* root, int level)
 {
-   if (root == nullptr) // Tree empty
+   if (nullptr == root) // tree empty
    {
       return 0;
    }
-   if (level == 1) // One node inserted
+
+   if (1 == level) // root level 
    {
       return 1;
    }
-   return GetWidth(root->left, level - 1) + GetWidth(root->right, level - 1); // Recursive call traverse through tree
-   
+
+   return GetWidth(root->left, level-1) + GetWidth(root->right, level-1);
 }
 
 ////////////////////////////////////////
@@ -162,18 +171,20 @@ int IntTree::GetWidth(TreeNode* root, int level)
 int IntTree::GetMaxWidth(TreeNode* root)
 {
    int maxWidth = 0; // Variable initialization
-   int width;
+   int width = 0;
    int num_levels = GetTreeHeight(root) + 1; // Number of levels is one more than height
-   int i;
 
-   for (i = 0; i < num_levels; ++i) // Go through levels
+   for (int i = 0; i < num_levels; ++i)
    {
-      width = GetWidth(root, i + 1); // Call Private Recursive function
-      if (width > maxWidth) // Current width greater than current max
+      width = GetWidth(root, i + 1);
+
+      if (width > maxWidth)
       {
-         maxWidth = width; // Make max width new width
+         maxWidth = width;
       }
+
    }
+
    return maxWidth;
 }
 
