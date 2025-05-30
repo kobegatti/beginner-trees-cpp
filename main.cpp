@@ -30,9 +30,9 @@ void printMainMenu()
 }
 
 ////////////////////////////////////////
-// String to number function
+// string to int function
 ///////////////////////////////////////
-int GetNumber_From_String(std::string str)
+int stringToInt(std::string str)
 {
     if (str.empty())
     {
@@ -70,7 +70,7 @@ void ProcessInsert(IntTree& Oak)
         std::cout << INSERT_PROMPT; 
         getline(std::cin, input);
 
-        data = GetNumber_From_String(input);
+        data = stringToInt(input);
 
         if (data < INT_MIN || data > INT_MAX)
         {
@@ -137,7 +137,7 @@ int main()
         std::cout << MENU_PROMPT;
 
         getline(std::cin, choice_str);
-        choice = GetNumber_From_String(choice_str);
+        choice = stringToInt(choice_str);
 
         if (choice == Exit) { break; }
 
