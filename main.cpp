@@ -5,14 +5,14 @@
 
 
 ////////////////////////////////////////
-// Global constants
+// global constants
 ///////////////////////////////////////
-#define INSERT 1
-#define IN_ORDER 2
-#define LEAF_COUNT 3 
-#define TREE_HEIGHT 4 
-#define TREE_WIDTH 5 
-#define EXIT 6 
+const short Insert = 1;
+const short InOrder = 2;
+const short LeafCount = 3;
+const short TreeHeight = 4;
+const short TreeWidth = 5;
+const short Exit = 6;
 
 const std::string MAIN_MENU = "1. Insert Node \n2. In Order Print\n3. Leaf Count\n4. Tree Height\n5. Tree Width\n6. Exit\n";
 const std::string MENU_PROMPT = "Select an option: ";
@@ -129,23 +129,23 @@ int main()
         getline(std::cin, choice_str);
         choice = GetNumber_From_String(choice_str);
 
-        if (choice == EXIT) { break; }
+        if (choice == Exit) { break; }
 
         switch (choice)
         {
-            case INSERT:
+            case Insert:
                 ProcessInsert(Oak);
                 break;
-            case IN_ORDER:
+            case InOrder:
                 ProcessDisplay(Oak);
                 break;
-            case LEAF_COUNT:
+            case LeafCount:
                 ProcessLeafCount(Oak);
                 break;
-            case TREE_HEIGHT:
+            case TreeHeight:
                 ProcessTreeHeight(Oak);
                 break;
-            case TREE_WIDTH:
+            case TreeWidth:
                 ProcessMaxTreeWidth(Oak);
                 break;
             default:
